@@ -2,7 +2,6 @@
 title: "面试记录 [2024.7-2024.8]"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2024-07-05'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
  **2024.6.28日 \*** 视频面试蓝色脉动: 做AI视频编辑软件的公司-挂

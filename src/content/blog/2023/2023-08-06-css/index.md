@@ -2,7 +2,6 @@
 title: "CSS"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-08-06'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
 CSS is used to lay out and decorate HTML files, its content is complicated, and I will record all interesting features related CSS in this blog.

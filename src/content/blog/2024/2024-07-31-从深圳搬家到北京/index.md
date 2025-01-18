@@ -2,7 +2,6 @@
 title: "从深圳搬家到北京"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2024-07-31'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
  **1. 路途**

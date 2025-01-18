@@ -2,7 +2,7 @@
 title: 'Adam V1.0.0 安装步骤 Adam V1.0.0'
 description: 'An overview of the latest innovations in technology'
 pubDate: '2025-01-17'
-heroImage: '/blog-placeholder-3.jpg'
+tags: ['Adam V1.0.0']
 ---
 
 1. 下载安装包，解压文件。[下载链接](https://pan.baidu.com/share/init?surl=ZNISD3ol3HTKWjulQhox_Q&pwd=2qch)

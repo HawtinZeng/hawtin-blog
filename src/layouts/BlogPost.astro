@@ -8,7 +8,7 @@ import TagLink from "../components/TagLink.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, heroImage, tags } = Astro.props;
+const { title, description, pubDate, tags } = Astro.props;
 
 ---
 
@@ -31,9 +31,7 @@ const { title, description, pubDate, heroImage, tags } = Astro.props;
         </h1>
         <div>
           {
-            heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
-            )
+              <img width={1020} height={510} src={`https://picsum.photos/1020/510?random=${Math.random() }`} alt="" />
           }
         </div>
         <div class="mt-10">

@@ -2,7 +2,6 @@
 title: "研究生毕业小节（下）"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-08-17'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
 自从[上一篇小结](https://www.blogger.com/blog/post/edit/8052881733861886146/4997262032745898569)1/2023之后，很久没有去记录自己的想法了。现在是8/2023，对自己的技术水平已经有了底，大致是入门水平的程序员。

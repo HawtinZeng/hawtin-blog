@@ -2,7 +2,6 @@
 title: "电脑选购计划，面向前端开发"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-08-19'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
 ### 资料查找、思考、体验

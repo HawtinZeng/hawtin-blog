@@ -3,7 +3,11 @@ import { getCollection } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import TagLink from "./TagLink.astro";
 
-const posts = await getCollection("blog");
+let posts = await getCollection("blog");
+posts.sort((b1, b2) => {
+  return b2.data.pubDate.getTime() - b1.data.pubDate.getTime()
+})
+
 let numberOfPostsToDisplay = 3;
 let recentPosts = posts.slice(0, numberOfPostsToDisplay);
 ---
@@ -27,7 +31,7 @@ let recentPosts = posts.slice(0, numberOfPostsToDisplay);
         </div>
         <a href={`/blog/${post.slug}`}>
           <img
-            src={post.data.heroImage}
+            src={`https://picsum.photos/200/200?random=${Math.random() }`}
             alt=""
             class="w-40 h-24 bg-contain border border-gray-200"
           />

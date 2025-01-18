@@ -2,7 +2,6 @@
 title: "研究生毕业年小结（上）"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-01-10'
-heroImage: '/blog-placeholder-3.jpg'
 tags: ['研究生', 'innovation']
 ---
 

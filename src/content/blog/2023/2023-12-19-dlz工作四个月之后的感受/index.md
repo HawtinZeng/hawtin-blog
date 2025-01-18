@@ -2,7 +2,6 @@
 title: "DLZ工作四个月之后的感受"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-12-19'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
     在大乐装工作即将4个月了，最大的感受是好无趣，每天都想找人聊天。啊啊啊。虽然需求没能按时做完，但是我并不着急。（还是有点着急的，嘴上说着不着急）。或许强忍着自己的急切也是一种心态锻炼。

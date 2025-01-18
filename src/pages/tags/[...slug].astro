@@ -45,7 +45,7 @@ type Post = CollectionEntry<'blog'>;
               </div>
               <a href={`/blog/${post.slug}`}>
                 <img
-                  src={post.data.heroImage}
+                  src={`https://picsum.photos/200/200?random=${Math.random() }`}
                   alt=""
                   class="w-40 h-24 bg-contain border border-gray-200"
                 />

@@ -2,7 +2,6 @@
 title: "Vue Conf 2024记录"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2024-07-06'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
  橙天嘉禾影城，13:40-5:00，

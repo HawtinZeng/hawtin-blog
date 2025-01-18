@@ -2,7 +2,6 @@
 title: "DLZ工作一个月之后的感受"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-10-03'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
     来深圳工作差不多有一个月了，整体上感觉还好，在逐渐熟悉上班的生活。    

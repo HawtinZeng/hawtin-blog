@@ -2,7 +2,7 @@
 title: "Adam V1.0.0 用户手册 Adam V1.0.0 User Manual"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2025-01-17'
-heroImage: '/blog-placeholder-3.jpg'
+tags: ['Adam V1.0.0']
 ---
 
 1. Adam 提供快捷键操作。
@@ -24,7 +24,9 @@ heroImage: '/blog-placeholder-3.jpg'
     
     - Alt+8：截屏工具
     
-    - Alt+9：设置。Alt+数字按一次是激活工具，再按一次是关闭工具。=
+    - Alt+9：设置，目前提供一个设置模式，单次绘制或者多次绘制，单次绘制每次功能完成一个绘制之后，都会自动激活选择功能
+
+    - Alt+数字按一次是激活工具，再按一次是关闭工具。
 
 3. Adam没有使用网络，用户的窗口信息不会被泄露。
 
@@ -47,6 +49,8 @@ heroImage: '/blog-placeholder-3.jpg'
     
     - Alt+8: Screen capture tool.
     
-    - Alt+9: Settings. Press Alt+number once to activate the tool, and press again to close the tool.
+    - Alt+9: Settings. Currently, there is a setting mode, single drawing or multiple drawing. In single drawing, after each drawing is completed, the selection function will be automatically activated.
+
+    - Press Alt+number once to activate the tool, and press again to close the tool.
 
 3. Adam does not use the network, and the user's window information will not be leaked.

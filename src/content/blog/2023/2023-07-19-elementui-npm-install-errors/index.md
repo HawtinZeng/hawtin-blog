@@ -2,7 +2,6 @@
 title: "ElementUI npm install errors"
 description: 'An overview of the latest innovations in technology'
 pubDate: '2023-07-19'
-heroImage: '/blog-placeholder-3.jpg'
 ---
 
  Why: node-sass@4 isn't compatable with NodeV16, so I changed node-sass to V6, then I run nr dev:play, ERROR:node-sass...
