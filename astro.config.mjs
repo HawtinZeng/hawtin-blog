@@ -19,6 +19,13 @@ export default defineConfig({
             dark: 'catppuccin-latte',
           },
         },
+    },
+    image: {
+      service: {
+        entrypoint: 'astro/assets/services/sharp',
+        config: {
+          limitInputPixels: false,
+        },
       },
-    
+  },
 })
