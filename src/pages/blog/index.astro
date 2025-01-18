@@ -52,12 +52,14 @@ posts.forEach((post) => {
               <a class="font-bold text-lg" href={`/blog/${post.slug}`}>
                 {post.data.title}
               </a>
+              {JSON.stringify(post.data)}
               <div class="flex gap-2">
                 {post.data.tags?.map((i: string) => {
                   return <TagLink tag={i} />;
                 })}
               </div>
             </div>
+            
             <a href={`/blog/${post.slug}`}>
               <img
                 src={post.data.heroImage}
