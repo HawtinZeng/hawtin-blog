@@ -31,6 +31,8 @@ Of course, Adam is positioned as a tool software, and it also provides common fu
 
 ![](./gif/scrollTab.gif)
 
+![](./gif/video.gif)
+
 **3\. 后续计划** Next steps
 
 后续 adam 不仅需要继续修 bug，支持 Mac机器，支持Edge浏览器、FireFox浏览器。

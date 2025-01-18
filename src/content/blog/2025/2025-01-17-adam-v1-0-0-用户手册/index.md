@@ -28,6 +28,8 @@ tags: ['Adam V1.0.0']
 
     - Alt+数字按一次是激活工具，再按一次是关闭工具。
 
+    - Alt+q 退出Adam
+
 3. Adam没有使用网络，用户的窗口信息不会被泄露。
 
 1. Adam provides shortcut keys.
@@ -52,5 +54,7 @@ tags: ['Adam V1.0.0']
     - Alt+9: Settings. Currently, there is a setting mode, single drawing or multiple drawing. In single drawing, after each drawing is completed, the selection function will be automatically activated.
 
     - Press Alt+number once to activate the tool, and press again to close the tool.
+
+    - Alt+q quit Adam
 
 3. Adam does not use the network, and the user's window information will not be leaked.
