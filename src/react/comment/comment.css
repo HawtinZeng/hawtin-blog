@@ -1,0 +1,11 @@
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
+
+.ellipsis:hover {
+  -webkit-line-clamp: 999;
+}
