@@ -52,7 +52,7 @@ const { title, description, pubDate, tags } = Astro.props;
           }
         </div>
         
-        <CommentAll />
+        <CommentAll client:only="react" />
       </article>
     </main>
     <Footer />

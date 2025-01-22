@@ -4,9 +4,7 @@ body{margin:0; padding:0; -webkit-font-smoothing: antialiased; font-family:arial
 
 h1{font-size:14px; font-weight:400; margin:10px 0 0 0; color:#888888;}
 
-a{font-size:12px; font-weight:bold; margin-top:10px; display:inline-block; text-decoration:none; color:#008A68;}
-
-svg{
+.like{
   cursor:pointer; overflow:visible; width:60px;
   #heart{transform-origin:center; animation:animateHeartOut .3s linear forwards;}
   #main-circ{transform-origin:29.5px 29.5px;}
