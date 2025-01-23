@@ -4,6 +4,8 @@ import 'react-quill-new/dist/quill.snow.css';
 import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
+import "./insertCom.css"
+
 const editorModules = { syntax: false,
   toolbar: [
     [ { size: [] }],
@@ -37,7 +39,7 @@ const editorModules = { syntax: false,
 
 export function InsertCom ({pos, width}: InsertComProps) {
   const [value, setValue] = useState('');
-  const containerStyle = {position: "fixed", marginTop: "10px", border: "1px solid #2fa5fb", borderRadius: "5px", padding: "10px", left: pos.left, top: pos.top, backgroundColor: "#ffffff", width} as any
+  const containerStyle = {position: "fixed", marginTop: "10px", border: "1px solid #2fa5fb", borderRadius: "5px", padding: "10px", left: pos.left, top: pos.top, backgroundColor: "#ffffff", width, minHeight:"200px"} as any
   
   return <div style={containerStyle}>
     <div style={{position: "relative", display: "flex", alignItems: "center", marginBottom: "10px"}}><span style={{color: "#7C7C7C", }}>回复：</span>小明
