@@ -6,7 +6,9 @@ interface CommentProps {
   onReply: (a: any) => void; // Define the event handler prop
   isSub: boolean;
 }
+
 export function Comment ({onReply, isSub}: CommentProps) {
+
   const containerStyle = {width:  "100%", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px"}
   if (isSub) {
     containerStyle.width = "calc(100% - 40px)"
