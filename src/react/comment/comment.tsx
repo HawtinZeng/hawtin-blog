@@ -1,32 +1,69 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Like } from "../like/like"
-import "./comment.css"
 import { IconButton } from '@mui/material'
-interface CommentProps {
-  onReply: (a: any) => void; // Define the event handler prop
-  isSub: boolean;
+import DeleteIcon from '@mui/icons-material/Delete';
+import { InsertCom } from "../insertComment/insertCom";
+export interface CommentProps {
+  author:string,
+  toComment: string, 
+  likes: number,
+  content: string,
+  createTime: number,
+  location: string,
+  userInfo?: any,
+  comments: string[],
+  canDel?: boolean,
+  blogId: string,
+  _id?: string,
 }
 
-export function Comment ({onReply, isSub}: CommentProps) {
+export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshComments: () => void}) {
+  const {author, canDel, toComment, likes, comments, content, createTime, location} = comp
+  const name = comp.userInfo?.[0]?.name
+  
+  const [isReplying, setisReplying] = useState(false)
+  const containerStyle = {width:  "100%", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", transition: "height 3s ease"}
+  if (toComment.length === 0) {
+    containerStyle.width = "calc(100% - 40px)";
+    (containerStyle as any).marginLeft = "40px"
+  }
 
-  const containerStyle = {width:  "100%", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px"}
-  if (isSub) {
-    containerStyle.width = "calc(100% - 40px)"
-    containerStyle.marginLeft = "40px"
+  function reply() {
+    setisReplying(!isReplying)
   }
 
   const containerRef = useRef(null)
+
+  function noReply() {
+    setisReplying(false)
+  }
+
+  async function deleteComment() {
+    await fetch('/api/comment', {method: "Delete", body: JSON.stringify(comp)})
+    await refreshComments()
+  }
+  
+  const to = {id: comp._id!, name: comp.userInfo?.[0]?.name}
+  
   return <div style={containerStyle} ref={containerRef}>
-    <div onClick={() => onReply(containerRef.current)} style={{position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between"}}><span>小明 <span style={{fontSize: "14px", color: "#7C7C7C"}}>@北京@2025.1.22 11:47</span></span>
-    <div>
-      <IconButton>
-          <svg className="icon" t="1737474292878" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4529" width="25" height="25"><path d="M937.664 896C884.928 746.944 743.104 640 576 640v128a64.106667 64.106667 0 0 1-33.792 56.448 63.872 63.872 0 0 1-65.664-3.2l-384-256a64 64 0 0 1-0.064-106.496l384-256A64.021333 64.021333 0 0 1 576 256v128c212.032 0 384 171.968 384 384 0 44.928-8.128 87.936-22.336 128z" fill="#aab8c2" p-id="4530"></path></svg>
+    <div style={{position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between"}}><span>{to.name} <span style={{fontSize: "14px", color: "#7C7C7C"}}>@{location}@{new Date(createTime).toLocaleString()}</span></span>
+      <div style={{display: "flex", alignItems: "center"}}>
+          <IconButton  onClick={() => reply()}>
+            <svg style={{marginBottom: "2px"}} className="icon" t="1737474292878" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4529" width="25" height="25"><path d="M937.664 896C884.928 746.944 743.104 640 576 640v128a64.106667 64.106667 0 0 1-33.792 56.448 63.872 63.872 0 0 1-65.664-3.2l-384-256a64 64 0 0 1-0.064-106.496l384-256A64.021333 64.021333 0 0 1 576 256v128c212.032 0 384 171.968 384 384 0 44.928-8.128 87.936-22.336 128z" fill="#aab8c2" p-id="4530"></path></svg>
+          </IconButton>
+          {comments?.length ?? 0}
+          <IconButton>
+            <Like />
         </IconButton>
-        <IconButton>
-          <Like />
-        </IconButton>
+        {likes}
+
+        {canDel && 
+        <IconButton onClick={deleteComment}>
+          <DeleteIcon  style={{ color: '#AAB8C2' }}  />
+        </IconButton>}
+      </div>
     </div>
-    </div>
-    <div className="ellipsis">你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样你怎么这样</div>
+    <div dangerouslySetInnerHTML={{__html: content}}></div>
+      {isReplying && <InsertCom to={to} noReply={noReply} refreshComments={refreshComments} />} 
   </div>
 }

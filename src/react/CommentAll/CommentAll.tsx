@@ -1,69 +1,70 @@
 import { useEffect, useRef, useState } from "react";
-import { Comment } from "../comment/comment";
-import { InsertCom, type InsertComProps } from "../insertComment/insertCom";
+import { Comment, type CommentProps } from "../comment/comment";
+import { InsertCom } from "../insertComment/insertCom";
 import { PhoneWire } from "./PhoneWire";
-
-/*
-var url = canvas.toDataURL('image/jpeg');
-el.style.background = 'url(' + url + ')';
-*/
+import { Button } from "@mui/material";
 
 export function CommentAll() {
-
-  const [replying, setreplying] = useState(false)
-  const [width, setwidth] = useState('')
-  const [pos, setpos] = useState<any>({left: '', top: ''})
-  const lastClickedDom = useRef<any>(null)
-  const commentedDom = useRef<any>(null)
   
-  function onReply(dom: HTMLElement) {
-    commentedDom.current = dom
-
-    const bounds = dom.getBoundingClientRect()
-    if (lastClickedDom.current === dom || !replying) {
-      setreplying(!replying)
-      if (replying) {
-        commentedDom.current = null
-      }
-    }
-
-    setpos({left: bounds.left + 'px', top: bounds.top + bounds.height + 'px'})
-    setwidth(bounds.width + 'px')
-
-    lastClickedDom.current = dom
-  }
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const userInfo = useRef<any>('')
+  const [allComData, setallComData] = useState<CommentProps[]>([])
 
   useEffect(() => {
     const bounds = containerRef.current?.getBoundingClientRect()
     canvasRef.current!.height = bounds!.height
+
+    const userInf = fetch('/api/user', {
+			method: 'POST',
+			headers: {
+				Accept: "application/json",
+    }})
+
+    userInfo.current = userInf
+
     canvasRef.current!.width = 120
     const wire = new PhoneWire(canvasRef.current!, {}, {})
 
-    const scrollHandler = (e: MouseEvent) => {
-      if (commentedDom.current) {
-        const bounds = commentedDom.current.getBoundingClientRect()
-        setpos({left: bounds.left + 'px', top: bounds.top + bounds.height + 'px'})
-      }
-    }
-    window.addEventListener('scroll', scrollHandler)
+    refreshComments()
     
     return () => {
-      window.removeEventListener('scroll', scrollHandler)
     }
-  }, [])
+  }, [])  
+  
+  const [isReplying, setisReplying] = useState('')
+  function reply() {
+    if (isReplying !== '') {
+      setisReplying('')
+    } else {
+      setisReplying('blog')
+    }
+  }
+
+  function noReply() {
+    setisReplying('')
+  }
+
+  async function refreshComments() {
+    const commentsJson = await fetch('/api/comment', {method: "GET"})
+    const comments = await  commentsJson.json()
+    setallComData(comments)
+  }
+
+  const paths = window.location.pathname.split('/');
+  const to = {id: 'blog-' + paths[paths.length - 1], name: ''}
   
   return <div style={{marginTop: "30px", position: "relative"}} ref={containerRef}>
     <canvas ref={canvasRef} style={{ position: "absolute", left: "-80px"}} />
-    <span style={{display: "inline-block",fontSize: "16px",fontWeight: "700", marginBottom: "10px"}}>评论：</span>
-  <Comment isSub={false} onReply={onReply} />
-  <Comment isSub={true} onReply={onReply} />
-  <Comment isSub={true}  onReply={onReply} />
-  <Comment isSub={true} onReply={onReply} />
-  <Comment isSub={true} onReply={onReply} />
-  <Comment isSub={true} onReply={onReply} />
-  <Comment isSub={true} onReply={onReply} />
-  {replying && <InsertCom pos={pos} width={width} />}
+    <div style={{padding: "10px 0"}}>
+      <span style={{display: "inline-block",fontSize: "16px",fontWeight: "700", marginBottom: "10px"}}>评论：</span>
+      <Button variant="text" style={{float: "right"}} onClick={reply}>
+        添加评论
+      </Button>
+      {isReplying && <InsertCom to={to} noReply={noReply} refreshComments={refreshComments} />} 
+    </div>
+    {allComData.map(comp => {
+      return <Comment comp={comp} refreshComments={refreshComments} />
+    })}
   </div>
 }

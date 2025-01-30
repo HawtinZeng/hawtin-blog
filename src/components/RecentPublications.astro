@@ -3,13 +3,13 @@ import { getCollection } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 import TagLink from "./TagLink.astro";
 
-let posts = await getCollection("blog");
-posts.sort((b1, b2) => {
+let blog = await getCollection("blog");
+
+blog.sort((b1, b2) => {
   return b2.data.pubDate.getTime() - b1.data.pubDate.getTime()
 })
-
 let numberOfPostsToDisplay = 3;
-let recentPosts = posts.slice(0, numberOfPostsToDisplay);
+let recentPosts = blog.slice(0, numberOfPostsToDisplay);
 ---
 
 <div class="px-4 md:px-16 flex flex-col gap-4 mt-16">

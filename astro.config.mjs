@@ -26,6 +26,24 @@ export default defineConfig({
       entrypoint: 'astro/assets/services/sharp',
       config: {
         limitInputPixels: false
+      },
+    }
+  },
+  
+  vite: {
+    server: {
+      proxy: {
+        '/visuals': {
+          target: process.env.BACKEND,
+          changeOrigin: true,
+          secure: false,
+        },
+        '/api': {
+          target: process.env.BACKEND,
+          changeOrigin: true,
+          secure: false,
+          rewrite: path => path.replace(/^\/api/, ''),
+        }
       }
     }
   }

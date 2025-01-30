@@ -23,15 +23,11 @@ Of course, Adam is positioned as a tool software, and it also provides common fu
 
 2\. **功能演示** Functional Demonstration
 
-![](./gif/changeWindow.gif)
-
-![](./gif/dragMove.gif)
-
-![](./gif/pen.gif)
-
-![](./gif/scrollTab.gif)
-
-![](./gif/video.gif)
+<video autoplay loop src="./video/changeWindow.mp4" style="width: 100%; height: 100%"></video>
+<video autoplay loop src="./video/dragMove.mp4" style="width: 100%; height: 100%"></video>
+<video autoplay loop src="./video/pen.mp4" style="width: 100%; height: 100%"></video>
+<video autoplay loop src="./video/scrollTab.mp4" style="width: 100%; height: 100%"></video>
+<video autoplay loop src="./video/video.mp4" style="width: 100%; height: 100%"></video>
 
 **3\. 后续计划** Next steps
 

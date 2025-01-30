@@ -1,13 +1,18 @@
 import { defineCollection, z} from 'astro:content'
-import { glob } from 'astro/loaders'
 import { markdownTestLoader } from './loader'
 export type BlogData = {
     _id: string,
     title: string,
     content: string,
 }
+
+import { jokesLoader } from "./jokes";
+const jokes = defineCollection({
+    loader: jokesLoader,
+});
+
 const blog = defineCollection({
-    loader: markdownTestLoader({url: "http://localhost:3006/read"}),
+    loader: markdownTestLoader,
     schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -17,5 +22,4 @@ const blog = defineCollection({
     }),
 })
 
-export const collections = { blog }
-
+export const collections = { blog, jokes }

@@ -10,9 +10,9 @@ h1{font-size:14px; font-weight:400; margin:10px 0 0 0; color:#888888;}
   #main-circ{transform-origin:29.5px 29.5px;}
 }
 
-#checkbox{display:none;}
+.checkbox{display:none;}
 
-#checkbox:checked + label svg{
+.checkbox:checked + label svg{
     #heart{transform:scale(.2); fill:#E2264D; animation:animateHeart .3s linear forwards .25s;}
     #main-circ{transition:all 2s; animation:animateCircle .3s linear forwards; opacity:1;}
     #grp1{
