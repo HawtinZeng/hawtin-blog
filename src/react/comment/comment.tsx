@@ -3,10 +3,12 @@ import { Like } from "../like/like"
 import { IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { InsertCom } from "../insertComment/insertCom";
+import { Barrage } from "./Barrage";
+import zIndex from "@mui/material/styles/zIndex";
 export interface CommentProps {
   author:string,
   toComment: string, 
-  likes: number,
+  likes: string[],
   content: string,
   createTime: number,
   location: string,
@@ -15,17 +17,22 @@ export interface CommentProps {
   canDel?: boolean,
   blogId: string,
   _id?: string,
+  checked?: boolean,
 }
 
 export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshComments: () => void}) {
-  const {author, canDel, toComment, likes, comments, content, createTime, location} = comp
-  const name = comp.userInfo?.[0]?.name
+  const {canDel, toComment, likes, comments, content, createTime, location, checked} = comp
   
   const [isReplying, setisReplying] = useState(false)
-  const containerStyle = {width:  "100%", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", transition: "height 3s ease"}
+  const containerStyle = {width:  "100%", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", backgroundColor: "#ffffff", position: "relative", zIndex: 2}
+  const wrapperStyle = {}
   if (toComment.length === 0) {
     containerStyle.width = "calc(100% - 40px)";
     (containerStyle as any).marginLeft = "40px"
+  }
+  if (!comp.toComment.startsWith('blog')) {
+    // @ts-ignore
+    wrapperStyle.paddingLeft = "50px"
   }
 
   function reply() {
@@ -44,8 +51,18 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
   }
   
   const to = {id: comp._id!, name: comp.userInfo?.[0]?.name}
+
+  async function handleClick(isChecked: boolean) {
+    await fetch(`/api/like`, {method: "POST", body: JSON.stringify({
+      commentId: comp._id,
+      isChecked: isChecked
+    })})
+
+    await refreshComments()
+  }
   
-  return <div style={containerStyle} ref={containerRef}>
+  return <div style={wrapperStyle} id={comp._id} >
+    <div style={containerStyle} ref={containerRef}>
     <div style={{position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between"}}><span>{to.name} <span style={{fontSize: "14px", color: "#7C7C7C"}}>@{location}@{new Date(createTime).toLocaleString()}</span></span>
       <div style={{display: "flex", alignItems: "center"}}>
           <IconButton  onClick={() => reply()}>
@@ -53,9 +70,9 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
           </IconButton>
           {comments?.length ?? 0}
           <IconButton>
-            <Like />
+            <Like onClick={handleClick} initialCheck={checked} />
         </IconButton>
-        {likes}
+        {likes.length}
 
         {canDel && 
         <IconButton onClick={deleteComment}>
@@ -65,5 +82,6 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
     </div>
     <div dangerouslySetInnerHTML={{__html: content}}></div>
       {isReplying && <InsertCom to={to} noReply={noReply} refreshComments={refreshComments} />} 
+  </div>
   </div>
 }

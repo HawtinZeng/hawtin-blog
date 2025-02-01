@@ -41,7 +41,7 @@ export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, r
     const comment: CommentProps = {
       author: "",
       toComment: to.id, 
-      likes: 0,
+      likes: [],
       content: value,
       createTime: new Date().getTime(),
       location: '',

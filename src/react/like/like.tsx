@@ -1,16 +1,29 @@
 
+import { useEffect } from "react"
 import "./like.css"
 import {uniqueId} from 'lodash'
 
-export function Like () {
+export function Like ({onClick, initialCheck}: {onClick: (...args: any) => void, initialCheck: boolean}) {
   const checkbox = uniqueId()
+
+  useEffect(() => {
+    // @ts-ignore
+    document.getElementById(checkbox)!.checked = initialCheck
+  }, [])
+  
+  function onClickChecked() {
+    // @ts-ignore
+    const isChecked = document.getElementById(checkbox)!.checked
+    onClick(!isChecked)
+  }
+
   return <div style={{width: "25px",
     height: '25px',
     display: "flex",
     alignItems: 'center',
     justifyContent: 'center'}}>
   <input type="checkbox" id={checkbox} className="checkbox" />
-  <label htmlFor={checkbox}>
+  <label htmlFor={checkbox}  onClick={onClickChecked}>
     <svg className="like" id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg" style={{width: "40px"}}>
       <g id="Group" fill="none" fillRule="evenodd" transform="translate(467 392)">
         <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" fill="#AAB8C2"/>

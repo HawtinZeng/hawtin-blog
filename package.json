@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@amcharts/amcharts5": "^5.10.12",
     "@astrojs/check": "^0.8.1",
     "@astrojs/mdx": "^4.0.7",
     "@astrojs/react": "^4.1.6",
@@ -21,9 +22,11 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.1",
     "@mui/material": "^6.4.1",
+    "@types/animejs": "^3.1.13",
     "@types/lodash": "^4.17.15",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "animejs": "^3.2.2",
     "astro": "^5.1.10",
     "astro-iconify": "^1.2.0",
     "astro-navbar": "^2.3.2",
