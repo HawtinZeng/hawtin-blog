@@ -9,19 +9,24 @@ export const Barrage = memo(({comp, idx}: {comp: CommentProps, idx: number}) => 
   const centerArticle = useRef<HTMLElement>(document.getElementsByTagName('article')?.[0])
 
   let stop = false, passed = false
+  
+  const currrentTranslateX = useRef<number>(0)
   function startMove() {
     if (!dom.current || stop) return
     const articleBBX = centerArticle.current!.getBoundingClientRect()
-    const left = Number(dom.current?.style.left.slice(0, -2))
-    if (left < 0) {
+    
+    if (currrentTranslateX.current < -windowRight) {
       passed = false
-      dom.current!.style.left = windowRight + 'px'
-    } else if (left < articleBBX.left + articleBBX.width && !passed) {
+      currrentTranslateX.current = 0
+    } else if (currrentTranslateX.current < -(windowRight - articleBBX.right) && !passed) {
       passed = true
-      dom.current!.style.left = articleBBX.left + 'px'
+      currrentTranslateX.current = -(windowRight - articleBBX.right) -articleBBX.width
     } else {
-      dom.current!.style.left = left - 1 + 'px'
+      currrentTranslateX.current = currrentTranslateX.current - Math.max((3 - comp.likes.length * 0.2 - comp.comments.length * 0.1), 1)
     }
+    
+    const t = `translateX(${currrentTranslateX.current + 'px'})`
+    dom.current!.style.transform = t;
     requestAnimationFrame(startMove)
   }
   useEffect(() => {
