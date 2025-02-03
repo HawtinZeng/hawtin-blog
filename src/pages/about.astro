@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+import { WaterPool } from './WaterPool/WaterPool'
 ---
 
 <Layout
@@ -11,4 +12,6 @@ import Layout from '../layouts/BlogPost.astro';
 		北京，前端工程师 
 	</p>
 	<p>Front end software engineer@Beijing</p>
+	
+	<WaterPool client:only="react" />
 </Layout>
