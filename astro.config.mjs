@@ -38,6 +38,11 @@ export default defineConfig({
           changeOrigin: true,
           secure: false,
         },
+        '/pkgs': {
+          target: process.env.BACKEND,
+          changeOrigin: true,
+          secure: false,
+        },
         '/api': {
           target: process.env.BACKEND,
           changeOrigin: true,

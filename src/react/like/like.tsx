@@ -1,4 +1,3 @@
-
 import { useEffect } from "react"
 import "./like.css"
 import {uniqueId} from 'lodash'

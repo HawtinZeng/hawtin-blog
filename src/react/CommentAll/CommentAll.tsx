@@ -23,7 +23,7 @@ export function CommentAll() {
     }})
 
     userInfo.current = userInf
-    canvasRef.current!.width = 150
+    canvasRef.current!.width = 120
     
     refreshComments()
     return () => {
@@ -38,7 +38,7 @@ export function CommentAll() {
     setzoom(window.devicePixelRatio!)
     window.addEventListener('resize', handleResize);
     
-    PhoneWire.colorSet = am5.ColorSet.new(am5.Root.new('wire'), {})
+    PhoneWire.colorSet = am5.ColorSet.new(am5.Root.new('wire'), {step: 3})
     
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -113,7 +113,7 @@ export function CommentAll() {
   const to = {id: 'blog-' + blogId, name: ''}
   
   return <div style={{marginTop: "30px", position: "relative"}} ref={containerRef}>
-    <canvas id="wire" ref={canvasRef} style={{ position: "absolute", left: "-80px", zIndex: 1}} />
+    <canvas id="wire" ref={canvasRef} style={{ position: "absolute", left: "-40px", zIndex: 1}} />
     <div style={{padding: "10px 0", position: "sticky", top: "0px", background: "#fff", zIndex: 999,}}>
       <span style={{display: "inline-block",fontSize: "16px",fontWeight: "700", marginBottom: "10px"}}>评论：</span>
       <Button variant="text" style={{float: "right"}} onClick={reply}>
