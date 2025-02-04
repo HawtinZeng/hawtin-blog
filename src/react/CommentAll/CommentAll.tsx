@@ -6,6 +6,7 @@ import { InsertCom } from "../insertComment/insertCom";
 import { PhoneWire } from "./PhoneWire";
 import { Button } from "@mui/material";
 import { Barrage } from "../comment/Barrage";
+import { extractPort } from "../../utils/path";
 
 export function CommentAll() {
   
@@ -100,8 +101,7 @@ export function CommentAll() {
     setisReplying('')
   }
 
-  const paths = window.location.pathname.split('/');
-  const blogId = paths[2]
+  const blogId = extractPort(2)
 
   async function refreshComments() {
     

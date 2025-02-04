@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import "./insertCom.css"
 import type { CommentProps } from '../comment/comment';
+import { extractPort } from '../../utils/path';
 
 const editorModules = { syntax: false,
   toolbar: [
@@ -36,8 +37,7 @@ export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, r
 
   async function send () {
     
-    const paths = window.location.pathname.split('/');
-    const blogId = paths[paths.length - 1]
+    const blogId = extractPort(2)
     const comment: CommentProps = {
       author: "",
       toComment: to.id, 
