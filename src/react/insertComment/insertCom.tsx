@@ -32,8 +32,8 @@ const editorModules = { syntax: false,
   ]}
 
 export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, refreshComments: () => void, to: {id: string, name: string}}) {
+  const containerStyle = { marginTop: "10px", border: "1px solid #2fa5fb", borderRadius: "5px", padding: "10px", minHeight:"200px"} as any
   const [value, setValue] = useState('');
-  const containerStyle = { marginTop: "10px", border: "1px solid #2fa5fb", borderRadius: "5px", padding: "10px", backgroundColor: "#ffffff", minHeight:"200px"} as any
 
   async function send () {
     

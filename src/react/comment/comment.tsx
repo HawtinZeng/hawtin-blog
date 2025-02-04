@@ -23,7 +23,7 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
   const {canDel, toComment, likes, comments, content, createTime, location, checked} = comp
   
   const [isReplying, setisReplying] = useState(false)
-  const containerStyle = {width: "calc(100% - 40px)", marginLeft: "40px", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", backgroundColor: "#ffffff", position: "relative", zIndex: 2}
+  const containerStyle = {width: "calc(100% - 40px)", marginLeft: "40px", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", position: "relative", zIndex: 2}
   const wrapperStyle = {}
   if (toComment.length === 0) {
     containerStyle.width = "calc(100% - 40px)";
