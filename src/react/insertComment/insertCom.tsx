@@ -44,7 +44,6 @@ export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, r
       likes: [],
       content: value,
       createTime: new Date().getTime(),
-      location: '',
       blogId,
       comments: []
     }

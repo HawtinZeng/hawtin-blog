@@ -101,7 +101,7 @@ export function CommentAll() {
   }
 
   const paths = window.location.pathname.split('/');
-  const blogId = paths[paths.length - 1]
+  const blogId = paths[2]
 
   async function refreshComments() {
     
