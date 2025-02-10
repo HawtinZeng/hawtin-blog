@@ -1,1 +1,0 @@
-# Source code of hawtin.me and adam.hawtin.me

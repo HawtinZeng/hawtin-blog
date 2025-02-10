@@ -1,0 +1,40 @@
+name: Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          repository: HawtinZeng/hawtin-blog
+          ref: main
+      - name: Deploy Code
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          command_timeout: 30m
+          script:  | 
+            cd /home/ubuntu/deployment/
+            if [ ! -d "my-repo" ]; then
+              git clone --depth=1 https://github.com/HawtinZeng/hawtin-blog
+              cd hawtin-blog
+            else
+              cd hawtin-blog
+              git pull
+            fi
+            npm install -f --loglevel=error
+            npm run build
+            cp /home/ubuntu/apps/blog/report.html ./report.html
+            rm /home/ubuntu/apps/blog/* -rf
+            cp ./report.html /home/ubuntu/apps/blog/report.html
+            cp ./dist/* /home/ubuntu/apps/blog/ -r
