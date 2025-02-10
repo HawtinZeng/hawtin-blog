@@ -1,14 +1,17 @@
+import fs from 'fs'
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 
 import react from "@astrojs/react";
+import pkgJson from './package.json'
+import { genBuildinfo } from './src/astroHooks/genBuildInfo';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), tailwind(), react()],
+  integrations: [genBuildinfo(), mdx(), sitemap(), tailwind(), react()],
   markdown: {
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
@@ -51,5 +54,6 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+  
 });

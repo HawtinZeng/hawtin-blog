@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-iconify";
 import {TwitterLogo} from '@astropub/icons'
+import pkg from '../../package.json'
 
 const today = new Date();
 ---
@@ -36,6 +37,10 @@ const today = new Date();
       </div>
       </div>
   </div>
+  <p class="text-sm font-medium mt-5">
+    Build Time: {pkg.buildTime},
+    App Version: {pkg.version}
+  </p>
   <p class="text-sm font-medium mb-10 mt-2">
     &copy; {today.getFullYear()} @zenghawtin. All rights reserved.
   </p>
