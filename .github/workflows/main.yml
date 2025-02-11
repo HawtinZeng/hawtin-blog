@@ -10,12 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-        with:
-          repository: HawtinZeng/hawtin-blog
-          ref: main
-      - name: Deploy Code
+      - name: Build and Deploy
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.HOST }}
