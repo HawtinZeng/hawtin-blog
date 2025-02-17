@@ -15,7 +15,20 @@ export function CommentAll() {
   const userInfo = useRef<any>('')
   const [allComData, setallComData] = useState<CommentProps[]>([])
 
-  useEffect(() => {
+  const [widthEnough, setwidthEnough] = useState(false)
+
+  function setWidth() {
+
+    const main = document.getElementsByTagName('main')
+    const radio = main[0].clientWidth / window.innerWidth
+    if (radio > 0.7) {
+      setwidthEnough(false)
+    } else {
+      setwidthEnough(true)
+    }
+  }
+
+  useEffect(() => {   
 
     const userInf = fetch('/api/user', {
 			method: 'POST',
@@ -27,7 +40,12 @@ export function CommentAll() {
     canvasRef.current!.width = 120
     
     refreshComments()
+    
+    setWidth()
+    window.addEventListener('resize', setWidth)
+    
     return () => {
+      window.removeEventListener('resize', setWidth)
     }
   }, [])  
   
@@ -127,8 +145,8 @@ export function CommentAll() {
       return <Comment  key={comp._id} comp={comp} refreshComments={refreshComments} />
     })}
 
-    {allComData.map((comp, idx) => {
+    {widthEnough ? allComData.map((comp, idx) => {
       return <Barrage key={idx} comp={comp} idx={idx} />
-    })}
+    }) : null}
   </div>
 }
