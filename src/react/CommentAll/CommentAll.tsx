@@ -15,16 +15,16 @@ export function CommentAll() {
   const userInfo = useRef<any>('')
   const [allComData, setallComData] = useState<CommentProps[]>([])
 
-  const [widthEnough, setwidthEnough] = useState(false)
+  const [wideEnough, setwideEnough] = useState(false)
 
   function setWidth() {
 
     const main = document.getElementsByTagName('main')
     const radio = main[0].clientWidth / window.innerWidth
     if (radio > 0.7) {
-      setwidthEnough(false)
+      setwideEnough(false)
     } else {
-      setwidthEnough(true)
+      setwideEnough(true)
     }
   }
 
@@ -145,7 +145,7 @@ export function CommentAll() {
       return <Comment  key={comp._id} comp={comp} refreshComments={refreshComments} />
     })}
 
-    {widthEnough ? allComData.map((comp, idx) => {
+    {wideEnough ? allComData.map((comp, idx) => {
       return <Barrage key={idx} comp={comp} idx={idx} />
     }) : null}
   </div>
