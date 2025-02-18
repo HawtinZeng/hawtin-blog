@@ -1,5 +1,4 @@
 import { memo, useEffect, useRef } from "react"
-import anime from "animejs"
 import type { CommentProps } from "./comment"
 
 export const Barrage = memo(({comp, idx}: {comp: CommentProps, idx: number}) => {
