@@ -17,6 +17,13 @@ const post = Astro.props;
 const { Content } = await render(post)
 ---
 
+<style>
+a {
+    color: inherit;
+    text-decoration: none;
+    overflow-wrap: break-word;
+}
+</style>
 <BlogPost {...post.data}>
 	<Content />
 </BlogPost>
