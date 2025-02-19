@@ -3,8 +3,6 @@ import { Like } from "../like/like"
 import { IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { InsertCom } from "../insertComment/insertCom";
-import { Barrage } from "./Barrage";
-import zIndex from "@mui/material/styles/zIndex";
 export interface CommentProps {
   author:string,
   toComment: string, 
