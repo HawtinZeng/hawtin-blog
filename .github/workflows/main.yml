@@ -20,14 +20,15 @@ jobs:
           command_timeout: 30m
           script:  | 
             cd /home/ubuntu/deployment/
-            if [ ! -d "my-repo" ]; then
+            if [ ! -d "hawtin-blog" ]; then
               git clone --depth=1 https://github.com/HawtinZeng/hawtin-blog
               cd hawtin-blog
             else
               cd hawtin-blog
-              git pull
+              git fetch origin
+              git reset --hard origin/main
             fi
-            npm install -f --loglevel=error
+              npm install -f --loglevel=error
             npm run build
             cp /home/ubuntu/apps/blog/report.html ./report.html
             rm /home/ubuntu/apps/blog/* -rf

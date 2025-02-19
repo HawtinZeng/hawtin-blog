@@ -10,7 +10,7 @@ a {
 
 article a {
     word-break: break-all;
-  }
+}
 
 a:hover {
     text-decoration: underline;
