@@ -139,6 +139,7 @@ export function CommentAll() {
   const blogId = extractPort(2)
 
   async function refreshComments() {
+    setisLoading(true)
     const commentsJson = await fetch(`/api/comment?blogId=${blogId}`, {method: "GET"})
     const comments = await  commentsJson.json()
     
@@ -167,10 +168,11 @@ export function CommentAll() {
       {isReplying && <InsertCom initialize={initializeInsert} destroy={destroyInsert} to={to} noReply={noReply} refreshComments={refreshComments} />} 
     </div>
     {allComData.length === 0 && !isLoading && <div>暂无评论</div>}
-    {isLoading && <div style={{display: "flex", justifyContent: 'center'}}><GradientCircularProgress /></div>}
     {allComData.map(comp => {
       return <Comment initialize={initializeInsert} destroy={destroyInsert} key={comp._id} comp={comp} refreshComments={refreshComments} />
     })}
+    
+    {isLoading && <div style={{display: "flex", justifyContent: 'center'}}><GradientCircularProgress /></div>}
 
     {wideEnough ? allComData.map((comp, idx) => {
       return <Barrage key={idx} comp={comp} idx={idx} />
