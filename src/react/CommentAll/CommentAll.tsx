@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import * as React from 'react';
 import * as am5 from "@amcharts/amcharts5";
 import { Comment, type CommentProps } from "../comment/comment";
 import { InsertCom } from "../insertComment/insertCom";
@@ -7,12 +7,29 @@ import { PhoneWire } from "./PhoneWire";
 import { Button } from "@mui/material";
 import { Barrage } from "../comment/Barrage";
 import { extractPort } from "../../utils/path";
+import CircularProgress from '@mui/material/CircularProgress';
 
+function GradientCircularProgress() {
+  return (
+    <React.Fragment>
+      <svg width={0} height={0}>
+        <defs>
+          <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#e01cd5" />
+            <stop offset="100%" stopColor="#1CB5E0" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <CircularProgress sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+    </React.Fragment>
+  );
+}
 export function CommentAll() {
   
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const userInfo = useRef<any>('')
+  const [isLoading, setisLoading] = useState(true)
   const [allComData, setallComData] = useState<CommentProps[]>([])
 
   const [wideEnough, setwideEnough] = useState(false)
@@ -122,27 +139,37 @@ export function CommentAll() {
   const blogId = extractPort(2)
 
   async function refreshComments() {
-    
     const commentsJson = await fetch(`/api/comment?blogId=${blogId}`, {method: "GET"})
     const comments = await  commentsJson.json()
+    
+    setisLoading(false)
     setallComData(comments)
   }
 
   const to = {id: 'blog-' + blogId, name: ''}
   const themeBg = localStorage.theme === 'dark' ? 'dark:bg-neutral-800' : ''
+
+  function initializeInsert() {
+    setallComData([...allComData])
+  }
+
+  function destroyInsert () {
+    setallComData([...allComData])
+  }
   
   return <div style={{marginTop: "30px", position: "relative"}} ref={containerRef}>
     <canvas id="wire" ref={canvasRef} style={{ position: "absolute", left: "-40px", zIndex: 1}} />
-    <div style={{padding: "10px 0", position: "sticky", top: "0px", zIndex: 999}} className={themeBg}>
+    <div style={{margin: "10px 0", position: "sticky", top: "0px", zIndex: 999, backgroundColor: "#ffffff", borderBottom: "1px solid #6b7280"}} className={themeBg}>
       <span style={{display: "inline-block",fontSize: "16px",fontWeight: "700", marginBottom: "10px"}}>评论：</span>
       <Button variant="text" style={{float: "right"}} onClick={reply}>
         添加评论
       </Button>
-      {isReplying && <InsertCom to={to} noReply={noReply} refreshComments={refreshComments} />} 
+      {isReplying && <InsertCom initialize={initializeInsert} destroy={destroyInsert} to={to} noReply={noReply} refreshComments={refreshComments} />} 
     </div>
-    {allComData.length === 0 && <div>暂无评论</div>}
+    {allComData.length === 0 && !isLoading && <div>暂无评论</div>}
+    {isLoading && <div style={{display: "flex", justifyContent: 'center'}}><GradientCircularProgress /></div>}
     {allComData.map(comp => {
-      return <Comment  key={comp._id} comp={comp} refreshComments={refreshComments} />
+      return <Comment initialize={initializeInsert} destroy={destroyInsert} key={comp._id} comp={comp} refreshComments={refreshComments} />
     })}
 
     {wideEnough ? allComData.map((comp, idx) => {

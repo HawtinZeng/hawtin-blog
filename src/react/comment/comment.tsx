@@ -7,7 +7,7 @@ export interface CommentProps {
   author:string,
   toComment: string, 
   likes: string[],
-  content: string,
+  content?: string,
   createTime: number,
   userInfo?: any,
   comments: string[],
@@ -17,8 +17,10 @@ export interface CommentProps {
   checked?: boolean,
 }
 
-export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshComments: () => void}) {
-  const {canDel, toComment, likes, comments, content, createTime, location, checked} = comp
+import "./commentBg.css"
+
+export function Comment ({comp, refreshComments, initialize, destroy}: {comp: CommentProps, refreshComments: () => void, initialize: () => void, destroy: () => void}) {
+  const {canDel, toComment, likes, comments, content, createTime, checked} = comp
   
   const [isReplying, setisReplying] = useState(false)
   const containerStyle = {width: "calc(100% - 40px)", marginLeft: "40px", border: "1px solid #446b87", borderRadius: "5px", padding: "10px", marginBottom: "10px", position: "relative", zIndex: 2}
@@ -43,6 +45,7 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
   }
 
   async function deleteComment() {
+    delete comp.content
     await fetch('/api/comment', {method: "Delete", body: JSON.stringify(comp)})
     await refreshComments()
   }
@@ -58,8 +61,8 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
     await refreshComments()
   }
   
-  return <div style={wrapperStyle} id={comp._id} >
-    <div style={containerStyle} ref={containerRef}>
+  return <div style={wrapperStyle} id={comp._id}>
+    <div style={containerStyle} ref={containerRef} className="default dark:bg-neutral-800 dark:text-neutral-300">
     <div style={{position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between"}}><span>{to.name} <span style={{fontSize: "14px", color: "#7C7C7C"}}>@{comp.userInfo?.location}@{new Date(createTime).toLocaleString()}</span></span>
       <div style={{display: "flex", alignItems: "center"}}>
           <IconButton  onClick={() => reply()}>
@@ -78,7 +81,7 @@ export function Comment ({comp, refreshComments}: {comp: CommentProps, refreshCo
       </div>
     </div>
     <div dangerouslySetInnerHTML={{__html: content}}></div>
-      {isReplying && <InsertCom to={to} noReply={noReply} refreshComments={refreshComments} />} 
+      {isReplying && <InsertCom initialize={initialize} destroy={destroy} to={to} noReply={noReply} refreshComments={refreshComments} />} 
   </div>
   </div>
 }

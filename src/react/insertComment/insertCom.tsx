@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { Button } from '@mui/material'
@@ -31,7 +31,7 @@ const editorModules = { syntax: false,
     ['clean'],
   ]}
 
-export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, refreshComments: () => void, to: {id: string, name: string}}) {
+export function InsertCom ({noReply, refreshComments, to, initialize, destroy}: {noReply: ()=>void, refreshComments: () => void, to: {id: string, name: string}, initialize: () => void, destroy: () => void}) {
   const containerStyle = { marginTop: "10px", border: "1px solid #2fa5fb", borderRadius: "5px", padding: "10px", minHeight:"200px"} as any
   const [value, setValue] = useState('');
 
@@ -50,9 +50,18 @@ export function InsertCom ({noReply, refreshComments, to}: {noReply: ()=>void, r
     await fetch('/api/comment', {method: "POST", body: JSON.stringify(comment)})
     noReply()
     refreshComments()
+
+    
   }
   
-  return <div style={containerStyle}>
+  useEffect(() => {
+    initialize()
+    
+    return () => {
+      destroy()
+    }
+  }, [])
+  return <div style={containerStyle} id='container'>
     <div style={{position: "relative", display: "flex", alignItems: "center", marginBottom: "10px"}}><span style={{color: "#7C7C7C", }}>回复：</span>{to.name}
     </div>
     <ReactQuill theme="snow" value={value} onChange={setValue} bounds='#full-container .ql-container'  modules={editorModules} />
