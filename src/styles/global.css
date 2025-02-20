@@ -11,6 +11,12 @@ a {
 article a {
     word-break: break-all;
 }
+article {
+    background-color: #fff;
+}
+.default {
+    background-color: #ffffff;
+}
 
 a:hover {
     text-decoration: underline;

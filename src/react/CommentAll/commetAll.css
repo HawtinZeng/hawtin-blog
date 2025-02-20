@@ -1,0 +1,8 @@
+.stickyCreateComment {
+  margin: 10px 0;
+  position: sticky;
+  top: 0px;
+  background-color: #ffffff;
+  z-index: 999;
+  border-bottom: 1px solid #6b7280;
+}

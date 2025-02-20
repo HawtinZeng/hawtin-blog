@@ -17,8 +17,6 @@ export interface CommentProps {
   checked?: boolean,
 }
 
-import "./commentBg.css"
-
 export function Comment ({comp, refreshComments, initialize, destroy}: {comp: CommentProps, refreshComments: () => void, initialize: () => void, destroy: () => void}) {
   const {canDel, toComment, likes, comments, content, createTime, checked} = comp
   

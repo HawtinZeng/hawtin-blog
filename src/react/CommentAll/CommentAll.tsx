@@ -148,7 +148,6 @@ export function CommentAll() {
   }
 
   const to = {id: 'blog-' + blogId, name: ''}
-  const themeBg = localStorage.theme === 'dark' ? 'dark:bg-neutral-800' : ''
 
   function initializeInsert() {
     setallComData([...allComData])
@@ -160,7 +159,7 @@ export function CommentAll() {
   
   return <div style={{marginTop: "30px", position: "relative"}} ref={containerRef}>
     <canvas id="wire" ref={canvasRef} style={{ position: "absolute", left: "-40px", zIndex: 1}} />
-    <div style={{margin: "10px 0", position: "sticky", top: "0px", zIndex: 999, backgroundColor: "#ffffff", borderBottom: "1px solid #6b7280"}} className={themeBg}>
+    <div className="stickyCreateComment dark:bg-neutral-800 dark:text-neutral-300">
       <span style={{display: "inline-block",fontSize: "16px",fontWeight: "700", marginBottom: "10px"}}>评论：</span>
       <Button variant="text" style={{float: "right"}} onClick={reply}>
         添加评论
