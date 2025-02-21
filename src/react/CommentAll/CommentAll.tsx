@@ -171,7 +171,7 @@ export function CommentAll() {
       return <Comment initialize={initializeInsert} destroy={destroyInsert} key={comp._id} comp={comp} refreshComments={refreshComments} />
     })}
     
-    {isLoading && <div style={{display: "flex", justifyContent: 'center'}}><GradientCircularProgress /></div>}
+    {<div style={{display: "flex", justifyContent: 'center', width: "100%"}}><GradientCircularProgress /></div>}
 
     {wideEnough ? allComData.map((comp, idx) => {
       return <Barrage key={idx} comp={comp} idx={idx} />
