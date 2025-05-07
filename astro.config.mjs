@@ -18,7 +18,6 @@ export default defineConfig({
       },
     }
   },
-  
   vite: {
     server: {
       proxy: {
