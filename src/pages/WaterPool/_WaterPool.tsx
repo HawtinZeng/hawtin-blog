@@ -2,8 +2,6 @@ import { Helmet } from 'react-helmet';
 export function WaterPool() {
 
   return <div id='waterpool'>
-    waterpool
-    
     <img style={{display: 'none'}} id="tiles" src="tiles.jpg" />
     <img style={{display: 'none'}} id="xneg" src="xneg.jpg" />
     <img style={{display: 'none'}} id="xpos" src="xpos.jpg" />
