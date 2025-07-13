@@ -18,9 +18,9 @@ jobs:
           port: ${{ secrets.PORT }}
           command_timeout: 30m
           script:  | 
+            cd /root/apps
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh 
-            cd /root/apps
             if [ ! -d "hawtin-blog" ]; then
               git clone --depth=1 https://github.com/HawtinZeng/hawtin-blog
               cd hawtin-blog
@@ -31,4 +31,3 @@ jobs:
             fi
               npm install -f --loglevel=error
             npm run build
-            docker run -d -v /home/apps/hawtin-blog/dist:/usr/share/nginx/html -v /home/apps/hawtin-blog/nginxConfd:/etc/nginx/conf.d --network=host nginx:latest
