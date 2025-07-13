@@ -31,8 +31,5 @@ jobs:
             fi
               npm install -f --loglevel=error
             npm run build
-
-            openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /root/apps/hawtin-blog/nginxConfd/nginx-selfsigned.key -out /root/apps/hawtin-blog/nginxConfd/nginx-selfsigned.crt
-            
             docker rm hawtin-blog -f
             docker run -d -v /root/apps/hawtin-blog/dist:/usr/share/nginx/html -v /root/apps/hawtin-blog/nginxConfd:/etc/nginx/conf.d --name hawtin-blog --network=host nginx:latest
