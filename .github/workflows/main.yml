@@ -19,7 +19,7 @@ jobs:
           port: ${{ secrets.PORT }}
           command_timeout: 30m
           script:  | 
-            cd /home/ubuntu/deployment/
+            cd /root/apps
             if [ ! -d "hawtin-blog" ]; then
               git clone --depth=1 https://github.com/HawtinZeng/hawtin-blog
               cd hawtin-blog
@@ -30,7 +30,7 @@ jobs:
             fi
               npm install -f --loglevel=error
             npm run build
-            cp /home/ubuntu/apps/blog/report.html ./report.html
-            rm /home/ubuntu/apps/blog/* -rf
-            cp ./report.html /home/ubuntu/apps/blog/report.html
-            cp ./dist/* /home/ubuntu/apps/blog/ -r
+            rm  /root/apps/blog/* -rf
+            cp ./dist/ /home/ubuntu/apps/blog/ -r
+            cp ./default.conf /home/ubuntu/apps/blog/
+            docker run -d -v /home/ubuntu/apps/blog/dist:/usr/share/nginx/html -v /home/ubuntu/apps/blog/nginxConfd:/etc/nginx/conf.d -p 80:80 nginx:latest
