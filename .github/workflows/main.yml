@@ -8,7 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Build and Deploy
         uses: appleboy/ssh-action@v0.1.10
@@ -19,6 +18,8 @@ jobs:
           port: ${{ secrets.PORT }}
           command_timeout: 30m
           script:  | 
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh 
             cd /root/apps
             if [ ! -d "hawtin-blog" ]; then
               git clone --depth=1 https://github.com/HawtinZeng/hawtin-blog
@@ -30,7 +31,4 @@ jobs:
             fi
               npm install -f --loglevel=error
             npm run build
-            rm  /root/apps/blog/* -rf
-            cp ./dist/ /home/ubuntu/apps/blog/ -r
-            cp ./default.conf /home/ubuntu/apps/blog/
-            docker run -d -v /home/ubuntu/apps/blog/dist:/usr/share/nginx/html -v /home/ubuntu/apps/blog/nginxConfd:/etc/nginx/conf.d -p 80:80 nginx:latest
+            docker run -d -v /home/apps/hawtin-blog/dist:/usr/share/nginx/html -v /home/apps/hawtin-blog/nginxConfd:/etc/nginx/conf.d -p 80:80 nginx:latest
