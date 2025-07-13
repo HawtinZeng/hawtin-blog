@@ -31,3 +31,4 @@ jobs:
             fi
               npm install -f --loglevel=error
             npm run build
+            docker run -d -v /root/apps/hawtin-blog/dist:/usr/share/nginx/html -v /root/apps/hawtin-blog/nginxConfd:/etc/nginx/conf.d --network=host nginx:latest
