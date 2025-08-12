@@ -5,7 +5,7 @@ import type { BlogData } from "./config";
 export const markdownTestLoader: Loader = {
 	name: "markdown-test-loader",
 	load: async ({ config, store, parseData, generateDigest, logger }: LoaderContext) => {
-		const url = 'http://api.hawtin.me:3006/blogs'
+		const url = 'http://hawtin.me:8085/blogs'
 
 		const res = await fetch(url, {
 			headers: {
