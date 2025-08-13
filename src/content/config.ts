@@ -6,11 +6,6 @@ export type BlogData = {
     content: string,
 }
 
-import { jokesLoader } from "./jokes";
-const jokes = defineCollection({
-    loader: jokesLoader,
-});
-
 const blog = defineCollection({
     loader: markdownTestLoader,
     schema: z.object({
@@ -22,4 +17,4 @@ const blog = defineCollection({
     }),
 })
 
-export const collections = { blog, jokes }
+export const collections = { blog }
